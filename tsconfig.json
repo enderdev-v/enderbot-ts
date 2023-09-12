@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    // "module": "ESNext",
+    "target": "es2022",
+    "moduleResolution": "Node",
+    "outDir": "dist",
+    "sourceMap": false,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "resolveJsonModule": true,
+    "importHelpers": true
+  },
+  "include": [
+    "src",
+    "env.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts",
+    "package-lock.json",
+    ".gitignore"
+  ],
+}

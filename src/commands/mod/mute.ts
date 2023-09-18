@@ -27,13 +27,9 @@ const mute: cmd = {
 		const time = ms(tiempo);
 		const muteReason = args[2];
 		if (!muteReason) return ('debes decir por que lo voy a mutear');
-		// const member = user;
-		console.log(user.isCommunicationDisabled() ? 'Esta en Timeout' : 'no esta');
-		if (user?.isCommunicationDisabled()) {
-			return message.reply('el usuario ya esta muteado');
-		}
-
-		user.timeout(time, muteReason).then(() => { }).catch((e) => {
+		if (user?.isCommunicationDisabled()) return message.reply('el usuario ya esta muteado');
+		
+		user.timeout(time, muteReason).catch((e) => {
 			console.log(e);
 		});
 		message.channel.send(`el usuario ${user} fue muteado por ${tiempo} con la razon de ${muteReason}`);

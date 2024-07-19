@@ -1,13 +1,28 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import chalk from 'chalk';
-import { BitFieldResolvable, Client, Collection, Intents, IntentsString } from 'discord.js';
-import mongo from 'mongoose';
+import { cmd, enderbotConfigType } from '@enderbot/types';
+import { Client, Collection, Options, GatewayIntentBits } from 'discord.js';
 import fs from 'node:fs';
 import path from 'path';
+import { enderbotConfig } from '@enderbot/classes/Config';
+import { Logger } from './classes/Logger';
+
 export class enderbot extends Client {
-	commands = new Collection();
+	commands: Collection<cmd, string> = new Collection();
+	config: enderbotConfigType = new enderbotConfig();
+	logger: Logger = new Logger();
 	constructor() {
-		super({ shards: 'auto', intents: Object.keys(Intents.FLAGS) as BitFieldResolvable<IntentsString, number> });
+		super({
+			intents: [GatewayIntentBits.GuildMembers, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildPresences, GatewayIntentBits.GuildEmojisAndStickers, GatewayIntentBits.GuildModeration, GatewayIntentBits.GuildPresences, GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMessageTyping, GatewayIntentBits.GuildMessageReactions],
+			shards: 'auto',
+			makeCache: Options.cacheWithLimits({
+				...Options.DefaultMakeCacheSettings,
+				ReactionManager: 0,
+				GuildMemberManager: {
+					maxSize: 20,
+					keepOverLimit: member => member.id === this.user?.id,
+				},
+			}),
+		});
 		
 	}
 	
@@ -22,10 +37,9 @@ export class enderbot extends Client {
 			for (const file of folder) {
 				const event = require(path.join('../events', folders, file));
 				this.on(event.default.name, async (...args) => event.default.run(this, ...args));
-
-
 			}
 		}
+		this.logger.info('Events Loaded');
 	}
 
 	loadCommands() {
@@ -37,17 +51,6 @@ export class enderbot extends Client {
 				this.commands.set(cmd.default.name, cmd.default);
 			}
 		}
-	}
-
-	LoadDB() {
-		mongo.connect(process.env.MongoDB, {
-			useNewUrlParser: true,
-			useUnifiedTopology: true,
-		} as mongo.ConnectOptions).then(() => {
-			console.log(chalk.bold.green`conectado correctamente a Mongo DB`);
-		}).catch((e) => {
-			console.log(chalk.italic.red`ocurrió un error al conectarse a MongoDB : ${e}`);
-
-		});
+		this.logger.info('Commands Loaded');
 	}
 }

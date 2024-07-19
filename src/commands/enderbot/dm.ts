@@ -2,7 +2,7 @@ const dm = {
 	name: 'dm',
 	alias: [],
 
-	async run (client, message, args) {
+	async run (_client, message, args) {
 		const user = message.mentions.members.first();
 
 		if (!user) return message.reply('no puedo expulsar a nadie mencionalo');

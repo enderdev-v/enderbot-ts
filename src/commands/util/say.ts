@@ -1,10 +1,10 @@
-import { cmd } from '../../types/enderbot';
+import { cmd } from '@enderbot/types';
 
 const say: cmd = {
 	name: 'say',
 	alias: [],
 
-	run (client, message, args) {
+	run (_client, message, args) {
 		const texto = args.join(' ');
 		if (!texto) return message.channel.send(' no hay texto');
 

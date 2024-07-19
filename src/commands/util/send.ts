@@ -1,13 +1,13 @@
 import { TextChannel } from 'discord.js';
-import { cmd } from '../../types/enderbot';
+import { cmd } from '@enderbot/types';
 
 const send: cmd = {
 	name: 'send',
 	alias: [],
-	run (client, message, args) {
-		if (!message.guild.me.permissions.has('MANAGE_MESSAGES')) return message.reply({ content: 'no tengo permisos', allowedMentions: { repliedUser: false } });
+	run (_client, message, args) {
+		if (!message.guild?.members.me?.permissions.has('ModerateMembers')) return message.reply({ content: 'no tengo permisos', allowedMentions: { repliedUser: false } });
 
-		if (!message.member.permissions.has('MANAGE_MESSAGES')) return message.reply({ content: 'no tienes permisos', allowedMentions: { repliedUser: false } });
+		if (!message.member?.permissions.has('ModerateMembers')) return message.reply({ content: 'no tienes permisos', allowedMentions: { repliedUser: false } });
 
 		const canal = message.mentions.channels.first();
 

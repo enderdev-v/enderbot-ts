@@ -1,15 +1,15 @@
-import { Schema, model } from 'mongoose';
+import { Document, Schema, model } from 'mongoose';
 
 const BadBots = new Schema({
-  guild: {
-    type: String,
-    required: true
-  },
-  bots: {
-    type: Array,
-    required: true,
-    default: []
-  }
+	guild: {
+		type: String,
+		required: true
+	},
+	bots: {
+		type: Array,
+		required: true,
+		default: []
+	}
 });
 
 interface Bots extends Document {

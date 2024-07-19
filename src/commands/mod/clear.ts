@@ -1,15 +1,15 @@
 import { TextChannel } from 'discord.js';
-import { cmd } from '../../types/enderbot';
+import { cmd } from '@enderbot/types';
 
 
 const clear: cmd = {
 	name: 'clear',
 	alias: [],
 
-	run (client, message, args) {
-		if (!message.guild.me.permissions.has('MANAGE_MESSAGES')) return message.reply('No tengo los permisos!');
+	run (_client, message, args) {
+		if (!message.guild?.members.me?.permissions.has('ModerateMembers')) return message.reply('No tengo los permisos!');
 
-		if (!message.member.permissions.has('MANAGE_MESSAGES')) return message.reply('no tienes permisos');
+		if (!message.member?.permissions.has('ModerateMembers')) return message.reply('no tienes permisos');
 
 		const cantidad = Number(args.join(' '));
 

@@ -2,7 +2,7 @@ const poke = {
 	name: 'poke',
 	alias: [],
 
-	run (client, message) {
+	run (_client, message) {
 		message.channel.send('hola mi pokemon favorito es: \n scoorbunny');
 	}
 

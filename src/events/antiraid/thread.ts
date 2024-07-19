@@ -1,5 +1,5 @@
 import { TextChannel } from 'discord.js';
-import { DiscordEvent } from '../../types/enderbot';
+import { DiscordEvent } from '@enderbot/types';
 const links = {
 	link: [
 		'https',

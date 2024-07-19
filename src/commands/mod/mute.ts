@@ -1,20 +1,20 @@
 // import { Guild, GuildMember } from 'discord.js';
-import { cmd } from '../../types/enderbot';
+import { cmd } from '@enderbot/types';
 import ms from 'ms';
 
 const mute: cmd = {
 	name: 'mute',
 	alias: [],
 
-	async run(client, message, args) {
-		if (!message.guild.members.me.permissions.has('MODERATE_MEMBERS')) return message.reply('No tengo los permisos!');
+	async run(_client, message, args) {
+		if (!message.guild?.members.me?.permissions.has('MuteMembers')) return message.reply('No tengo los permisos!');
 
-		const user = message.mentions.members.first();
+		const user = message.mentions.members?.first();
 
 		if (!user) return message.reply('no puedo mutear a nadie mencionalo');
 
 
-		if (!message.member.permissions.has('MODERATE_MEMBERS')) return message.reply('no tienes permisos para usar este comando');
+		if (!message.member?.permissions.has('MuteMembers')) return message.reply('no tienes permisos para usar este comando');
 
 		if (message.member.roles.highest.comparePositionTo(user.roles.highest) <= 0) return message.reply('no puede mutear a alguien igual o mayor rango que tu');
 

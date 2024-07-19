@@ -1,8 +1,8 @@
-import BadBots from '../../Schemas/BadBots';
-import { DiscordEvent } from '../../types/enderbot';
+import BadBots from '@enderbot/Schemas/BadBots';
+import { DiscordEvent } from '@enderbot/types';
 const Bots: DiscordEvent = {
-	name: 'GuildMemberAdd',
-	async run(client, member) {
+	name: 'guildMemberAdd',
+	async run(_client, member) {
 		const data = await BadBots.findOne({ guild: member.guild.id });
 
 		if (!data) return;

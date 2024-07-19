@@ -1,4 +1,4 @@
-import { cmd } from '../../types/enderbot';
+import { cmd } from '@enderbot/types';
 
 const ping: cmd = {
 	name: 'ping',

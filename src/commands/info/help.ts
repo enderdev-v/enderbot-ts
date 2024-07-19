@@ -1,13 +1,13 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { cmd } from '../../types/enderbot';
+import { cmd } from '@enderbot/types';
 
 const help: cmd = {
 	name: 'help',
 	alias: [],
 	
-	run (client, message, args) {
+	run (_client, message, args) {
 		const categoria = args.join(' ');
 
 		const categorias = fs.readdirSync(path.join('./src/commands'));

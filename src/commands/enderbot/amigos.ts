@@ -1,7 +1,7 @@
 const amigos = {
 	name: 'amigos',
 	alias: [],
-	run (client, message) {
+	run (_client, message) {
 		message.channel.send('hola mis amigos son ThemurftBot y endkachu :D');
 	}
 };

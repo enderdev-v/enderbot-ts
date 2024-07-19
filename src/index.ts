@@ -1,24 +1,28 @@
-
 import { enderbot } from './structures/Client';
-import chalk from 'chalk';
 import dotenv from 'dotenv';
-import mongo, { ConnectOptions }  from 'mongoose';
+import fs from 'fs';
+import mongo, { ConnectOptions } from 'mongoose';
+import '@enderbot/utils/anticrash';
 dotenv.config();
 const client = new enderbot();
 
-process.on('unhandledRejection', error => {
-	console.error(error);
+fs.stat('./src/structures/coconaut.jpeg', (err) => {
+	if (err) {
+		console.log('Fatal error: coco not found');
+	} else {
+		mongo.connect(process.env.MongoDB as string, {
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+		} as ConnectOptions).then(() => {
+			client.logger.check('MongoDB connection');
+		}).catch((e: Error) => {
+			client.logger.error(`Error: ${e.message}`);
+		});
+
+		client.loadEvents();
+		client.loadCommands();
+		client.start();
+	}
 });
 
-mongo.connect(process.env.MongoDB, {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-} as ConnectOptions).then(() => {
-	console.log(chalk.bold.green('MongoDB connection'));
-}).catch((e: Error) => {
-	console.log(chalk.bold.red('Error:'), e);
-});
-
-client.loadEvents();
-client.loadCommands();
-client.start();
+export default client;

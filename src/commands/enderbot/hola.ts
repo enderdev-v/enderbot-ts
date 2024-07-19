@@ -2,7 +2,7 @@ const hola = {
 	name: 'hola',
 	alias: [],
 
-	run (client, message) {
+	run (_client, message) {
 		message.channel.send(`hola ${message.author} musho gusto`);
 	}
 };

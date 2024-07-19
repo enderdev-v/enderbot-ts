@@ -1,11 +1,12 @@
 import { TextChannel } from 'discord.js';
-import { cmd } from '../../types/enderbot';
+import { cmd } from '@enderbot/types';
 
 const nuke: cmd = {
 	name: 'nuke',
 	alias: [],
 
-	async run(client, message) {
+	async run(_client, message) {
+
 		if (message.channel instanceof TextChannel) {
 			const posicion = message.channel.position;
 			message.channel.clone().then(async (canal) => {
@@ -16,14 +17,14 @@ const nuke: cmd = {
 					color: 0x3f7ede,
 					title: 'Canal nuked'
 				};
-				await canal.send({ embeds: [embed] }).then(m => {
+				await canal?.send({ embeds: [embed] }).then(m => {
 					setTimeout(() => {
 						m.delete();
 					}, 6000);
 
 				});
 			});
-		} else return;
+		}
 
 	}
 

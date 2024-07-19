@@ -2,7 +2,7 @@ import { EmbedBuilder } from 'discord.js';
 import { cmd } from '@enderbot/types';
 
 const info: cmd = {
-	name: 'info',
+	name: 'eval',
 	alias: [],
 
 	run(client, message) {

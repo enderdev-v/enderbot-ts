@@ -1,0 +1,18 @@
+{
+    "New Command": {
+        "prefix": "@enderbot/command",
+        "body": [
+            "import { cmd } from '@enderbot/types';",
+            "",
+            "const ${1:cmd}: cmd = {",
+            "name: '${1:cmd}',",
+            "alias: [],",
+            "",
+            "run (client, message) {",
+            "${2:code}",
+            "}",
+            "};",
+            "export default ${1:cmd};",
+        ]
+    }
+}

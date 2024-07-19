@@ -1,6 +1,6 @@
 const antispam = {
 	name: 'messageCreate',
-	async run (client, msg) {
+	async run (_client, msg) {
 		const users = ['955175950314799254', '780277567537414165', '862905211001503774', '282286160494067712'];
 		const channels = ['954735265988104193', '901239098025574400', '1112920459562995782'];
 		try {

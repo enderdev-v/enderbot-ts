@@ -1,12 +1,9 @@
-import chalk from 'chalk';
-import { DiscordEvent } from '../../types/enderbot';
+import { DiscordEvent } from '@enderbot/types';
+import { ActivityType } from 'discord.js';
 
 const ready: DiscordEvent = {
 	name: 'ready',
 	run (client) {
-
-		
-		// Presence
 
 		const activity = [
 			'Counting Stars',
@@ -18,23 +15,17 @@ const ready: DiscordEvent = {
 			'Wake me up',
 			'Sunburst'
 		];
+		activity;
+		function presence () {
+			client.user?.setActivity({
+				name: 'custom',
+				type: ActivityType.Custom,
+				state: 'Viendo videos de ender'
+			});
+		}
+		presence();
 
-		setInterval(() => {
-			function presence () {
-				client.user.setPresence({
-					status: 'online',
-					activities: [
-						{
-							name: activity[Math.floor(Math.random() * activity.length)],
-							type: 'LISTENING'
-						}
-					]
-				});
-			}
-			presence();
-		}, 50000);
-
-		console.log(chalk.italic.cyan('enderbot listo'));
+		client.logger.enderbot('Ready');
 	}
 };
 
